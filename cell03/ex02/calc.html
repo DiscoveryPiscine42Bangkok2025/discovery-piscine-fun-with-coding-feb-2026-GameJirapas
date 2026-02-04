@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>It's over 9000</title>
+</head>
+<body>
+
+<input type="text" id="left">
+<select id="op">
+    <option value="+">+</option>
+    <option value="-">-</option>
+    <option value="*">*</option>
+    <option value="/">/</option>
+    <option value="%">%</option>
+</select>
+<input type="text" id="right">
+
+<input type="submit" value="Try me!" onclick="calc()">
+
+<script>
+function calc() {
+    const a = document.getElementById("left").value;
+    const b = document.getElementById("right").value;
+    const op = document.getElementById("op").value;
+
+    if (!/^\d+$/.test(a) || !/^\d+$/.test(b)) {
+        alert("Error :(");
+        return;
+    }
+
+    const x = parseInt(a);
+    const y = parseInt(b);
+    let result;
+
+    if ((op === "/" || op === "%") && y === 0) {
+        alert("It's over 9000!");
+        console.log("It's over 9000!");
+        return;
+    }
+
+    switch (op) {
+        case "+": result = x + y; break;
+        case "-": result = x - y; break;
+        case "*": result = x * y; break;
+        case "/": result = x / y; break;
+        case "%": result = x % y; break;
+    }
+
+    alert(result);
+    console.log(result);
+}
+
+setInterval(function () {
+    alert("Please, use me...");
+}, 30000);
+</script>
+
+</body>
+</html>
