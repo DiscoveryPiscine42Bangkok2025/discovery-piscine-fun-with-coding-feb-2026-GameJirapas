@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Change background (jQuery)</title>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <style>
+        body {
+            text-align: center;
+            padding-top: 100px;
+            font-family: Arial, sans-serif;
+            transition: background-color 0.7s;
+        }
+
+        button {
+            padding: 12px 24px;
+            font-size: 18px;
+            background-color: black;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #660808;
+        }
+    </style>
+</head>
+<body>
+
+<button id="btn">Change color</button>
+
+<script>
+$(function () {
+    $("#btn").click(function () {
+        const color = '#' + Math.floor(Math.random() * 16777215).toString(16);
+        $("body").css("background-color", color);
+    });
+});
+</script>
+
+</body>
+</html>

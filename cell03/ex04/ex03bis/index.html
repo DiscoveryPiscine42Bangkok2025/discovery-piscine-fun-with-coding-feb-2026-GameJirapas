@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>To do or not to do (jQuery)</title>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        #ft_list div {
+            cursor: pointer;
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+
+<button id="new">New</button>
+
+<div id="ft_list"></div>
+
+<script>
+$(function () {
+
+    loadTodos();
+
+    $("#new").click(function () {
+        const text = prompt("New TO DO:");
+        if (!text) return;
+
+        addTodo(text);
+        saveTodos();
+    });
+
+    function addTodo(text) {
+        const div = $("<div>").text(text);
+
+        div.click(function () {
+            if (confirm("Remove this TO DO?")) {
+                $(this).remove();
+                saveTodos();
+            }
+        });
+
+        $("#ft_list").prepend(div);
+    }
+
+    function saveTodos() {
+        const todos = [];
+        $("#ft_list div").each(function () {
+            todos.push($(this).text());
+        });
+        document.cookie = "todos=" + encodeURIComponent(JSON.stringify(todos));
+    }
+
+    function loadTodos() {
+        const match = document.cookie.match(/todos=([^;]+)/);
+        if (!match) return;
+
+        const todos = JSON.parse(decodeURIComponent(match[1]));
+        todos.reverse().forEach(t => addTodo(t));
+    }
+
+});
+</script>
+
+</body>
+</html>
